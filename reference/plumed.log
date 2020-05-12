@@ -1,0 +1,70 @@
+PLUMED: PLUMED is starting
+PLUMED: Version: 2.3.0 (git: Unknown) compiled on Jan 14 2017 at 20:57:58
+PLUMED: Please cite this paper when using PLUMED [1]
+PLUMED: For further information see the PLUMED web page at http://www.plumed.org
+PLUMED: Molecular dynamics engine: acemd
+PLUMED: Precision of reals: 4
+PLUMED: Running over 1 node
+PLUMED: Number of threads: 1
+PLUMED: Cache line size: 512
+PLUMED: Number of atoms: 22
+PLUMED: File suffix: 
+PLUMED: FILE: plumed.dat
+PLUMED: Action UNITS
+PLUMED:   with label @0
+PLUMED:   length: A
+PLUMED:   energy: kcal/mol
+PLUMED:   time: ps
+PLUMED:   time: e
+PLUMED:   time: amu
+PLUMED:   using physical units
+PLUMED:   inside PLUMED, Boltzmann constant is 0.001987
+PLUMED: Action TORSION
+PLUMED:   with label phi
+PLUMED:   between atoms 13 15 17 1
+PLUMED:   using periodic boundary conditions
+PLUMED: Action TORSION
+PLUMED:   with label psi
+PLUMED:   between atoms 15 17 1 3
+PLUMED:   using periodic boundary conditions
+PLUMED: Action METAD
+PLUMED:   with label bias
+PLUMED:   with arguments phi psi
+PLUMED:   added component to this action:  bias.bias 
+PLUMED:   Binsize not specified, 1/5 of sigma will be be used
+PLUMED:   Gaussian width  0.200000 0.200000  Gaussian height 0.100000
+PLUMED:   Gaussian deposition pace 100
+PLUMED:   Gaussian file HILLS
+PLUMED:   Well-Tempered Bias Factor 10.000000
+PLUMED:   Hills relaxation time (tau) 5.365451
+PLUMED:   KbT 0.596161
+PLUMED:   Grid min -pi -pi
+PLUMED:   Grid max pi pi
+PLUMED:   Grid bin 158 158
+PLUMED:   Grid uses spline interpolation
+PLUMED:   added component to this action:  bias.work 
+PLUMED:   Bibliography [2][3]
+PLUMED: Action PRINT
+PLUMED:   with label @4
+PLUMED:   with stride 100
+PLUMED:   with arguments phi psi bias.bias bias.work
+PLUMED:   on file colvar
+PLUMED:   with format  %f
+PLUMED: END FILE: plumed.dat
+PLUMED: Timestep: 0.001000
+PLUMED: KbT has not been set by the MD engine
+PLUMED: It should be set by hand where needed
+PLUMED: Relevant bibliography:
+PLUMED:   [1] Tribello, Bonomi, Branduardi, Camilloni, and Bussi, Comput. Phys. Commun. 185, 604 (2014)
+PLUMED:   [2] Laio and Parrinello, PNAS 99, 12562 (2002)
+PLUMED:   [3] Barducci, Bussi, and Parrinello, Phys. Rev. Lett. 100, 020603 (2008)
+PLUMED: Please read and cite where appropriate!
+PLUMED: Finished setup
+PLUMED:                                               Cycles        Total      Average      Minumum      Maximum
+PLUMED:                                                    1   841.342271   841.342271   841.342271   841.342271
+PLUMED: 1 Prepare dependencies                      10000000    12.690858     0.000001     0.000001     0.026017
+PLUMED: 2 Sharing data                              10000000    44.556592     0.000004     0.000002     0.014017
+PLUMED: 3 Waiting for data                          10000000    18.927764     0.000002     0.000001     0.012598
+PLUMED: 4 Calculating (forward loop)                10000000   359.817987     0.000036     0.000019     0.037367
+PLUMED: 5 Applying (backward loop)                  10000000    86.120548     0.000009     0.000004     0.024036
+PLUMED: 6 Update                                    10000000   143.282973     0.000014     0.000005     0.018031
