@@ -3,6 +3,10 @@ UNITS  LENGTH=A  ENERGY=kcal/mol  TIME=ps
 phi: TORSION ATOMS=13,15,17,1 
 psi: TORSION ATOMS=15,17,1,3 
 
+PRINT ARG=* STRIDE=100 FILE=colvar
+
+
+ENDPLUMED
 
 METAD ...
  LABEL=bias
@@ -18,5 +22,4 @@ METAD ...
 ... METAD
 
 
-PRINT ARG=* STRIDE=100 FILE=colvar
 
