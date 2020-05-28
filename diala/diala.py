@@ -21,10 +21,11 @@ system.addForce(PlumedForce(script))
 
 system.addForce(PlumedForce(plumedScript, isScriptFile=True))
 
-req_plt = Platform.getPlatformByName('Reference')
+req_plt = Platform.getPlatformByName('CUDA')
 
 integrator = LangevinIntegrator(300*kelvin, 1/picosecond, 1*femtoseconds)
-simulation = Simulation(psf.topology, system, integrator, req_plt)
+simulation = Simulation(psf.topology, system, integrator,
+                        req_plt, {'DeviceIndex': '1'} )
 
 ctx = simulation.context
 platform = ctx.getPlatform()
@@ -44,6 +45,7 @@ simulation.saveState("pre.xml")
 simulation.reporters.append(DCDReporter('output.dcd', 1000))
 simulation.reporters.append(StateDataReporter(stdout, 1000, step=True,
         potentialEnergy=True, temperature=True))
+
 simulation.step(10000000)
 
-#simulation.step(5000)
+simulation.step(5000)

@@ -10,14 +10,8 @@ prmtop = AmberPrmtopFile('w.prmtop')
 inpcrd = AmberInpcrdFile('w.inpcrd')
 #pdb = PDBFile("w.pdb")
 
-L = 18.774
-box = (
-    Vec3( L, 0, 0) * angstrom,
-    Vec3( 0, L, 0) * angstrom,
-    Vec3( 0, 0, L) * angstrom
-)    
 
-#prmtop.topology.setPeriodicBoxVectors(box)
+
 
 system = prmtop.createSystem(nonbondedMethod=PME, 
 	nonbondedCutoff=9*angstrom,  constraints=HBonds)
@@ -25,11 +19,11 @@ system = prmtop.createSystem(nonbondedMethod=PME,
 
 
 #r: RESTRAINT ARG=d AT=5 KAPPA=150
+#UNITS LENGTH=A 
 
 plumedScript = """
-UNITS LENGTH=A 
-d: DISTANCE ATOMS=1,4
-r: RESTRAINT ARG=d AT=5 KAPPA=1500
+d: DISTANCE ATOMS=1,2758
+r: RESTRAINT ARG=d AT=1 KAPPA=1500
 PRINT ARG=* FILE=COLVAR
 """
 
@@ -52,10 +46,11 @@ simulation.minimizeEnergy(maxIterations=100)
 simulation.saveState("minimized.xml")
 
 print("Running")
-simulation.reporters.append(PDBReporter('output.pdb', 1000))
-simulation.reporters.append(StateDataReporter(stdout, 1000, step=True,
+simulation.reporters.append(DCDReporter('output.dcd', 100))
+simulation.reporters.append(PDBReporter('output.pdb', 100))
+simulation.reporters.append(StateDataReporter(stdout, 100, step=True,
                     potentialEnergy=True, temperature=True))
-simulation.step(100000)
+simulation.step(10000)
 
 simulation.saveState("post.xml")
 
