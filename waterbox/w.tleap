@@ -1,0 +1,11 @@
+source leaprc.water.tip3p
+
+w = HOH
+
+solvatebox w TIP3PBOX 15 iso
+saveamberparm w w.prmtop w.inpcrd
+savepdb w w.pdb
+
+check w
+quit
+
