@@ -23,7 +23,7 @@ system = prmtop.createSystem(nonbondedMethod=PME,
 
 plumedScript = """
 d: DISTANCE ATOMS=1,2758
-r: RESTRAINT ARG=d AT=1 KAPPA=1500
+r: RESTRAINT ARG=d AT=.5 KAPPA=1500
 PRINT ARG=* FILE=COLVAR
 """
 
