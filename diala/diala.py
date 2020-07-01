@@ -12,14 +12,10 @@ params = CharmmParameterSet('par_all27_prot_lipid.prm', permissive=True)
 system = psf.createSystem(params, nonbondedMethod=NoCutoff,
                           nonbondedCutoff=1*nanometer, constraints=None)
 
-plumedScript = "diala.plumed"
-"""
+plumedScript = "diala.plumed.nocont"
 with open(plumedScript) as f:
     script = f.read()
 system.addForce(PlumedForce(script))
-"""
-
-system.addForce(PlumedForce(plumedScript, isScriptFile=True))
 
 req_plt = Platform.getPlatformByName('CUDA')
 
@@ -33,7 +29,7 @@ print(f"Using platform {platform.getName()} with properties:")
 for prop in platform.getPropertyNames():
     print(f"    {prop}\t\t{platform.getPropertyValue(ctx,prop)}")
 
-L = 65.0
+L = 32.0
 ctx.setPeriodicBoxVectors([L,0,0], [0,L,0], [0,0,L])
 
 
@@ -48,4 +44,4 @@ simulation.reporters.append(StateDataReporter(stdout, 1000, step=True,
 
 simulation.step(10000000)
 
-simulation.step(5000)
+
