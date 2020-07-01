@@ -3,7 +3,7 @@ default: run fes.dat
 run:
 	python diala.py
 
-fes.dat:
+fes.dat: HILLS
 	plumed sum_hills --hills HILLS
 
 fes.png: fes.dat
