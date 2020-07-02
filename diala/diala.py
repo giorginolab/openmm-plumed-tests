@@ -6,7 +6,7 @@ from sys import stdout, exit, stderr
 from openmmplumed import PlumedForce
 
 psf = CharmmPsfFile('dia2.psf')
-pdb = PDBFile('dia2.pdb')
+pdb = PDBFile('minimized.pdb')
 
 params = CharmmParameterSet('par_all27_prot_lipid.prm', permissive=True)
 system = psf.createSystem(params, nonbondedMethod=NoCutoff,
@@ -21,7 +21,7 @@ req_plt = Platform.getPlatformByName('CUDA')
 
 integrator = LangevinIntegrator(300*kelvin, 1/picosecond, 1*femtoseconds)
 simulation = Simulation(psf.topology, system, integrator,
-                        req_plt, {'DeviceIndex': '1'} )
+                        req_plt, {'DeviceIndex': '0'} )
 
 ctx = simulation.context
 platform = ctx.getPlatform()
